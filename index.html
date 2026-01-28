@@ -73,17 +73,17 @@ button:hover{transform:scale(1.05);opacity:0.9}
 </div></div><script>
 const questions = [
  {q:"O Casca acordou bravo, o melhor é:", a:["Oferecer cerveja gelada","Deixar ele quieto","Brigar com ele","Sair de perto"]},
-
  {q:"Quando o Casca começa a reclamar de tudo você:", a:["Concorda pra não dar treta","Zoa mais ainda","Some do mapa","Muda de assunto"]},
-
  {q:"Se o Casca entra no modo caos total:", a:["Entrega bebida","Tenta acalmar","Compra a briga","Corre"]},
-
  {q:"Quando o Casca tá rindo alto demais você:", a:["Ri junto","Pede calma","Grava vídeo","Sai fora"]},
-
  {q:"Se o Casca fala que vai resolver tudo na força você:", a:["Apoia","Tenta impedir","Ignora","Corre longe"]}
 ];
 
+// índices das respostas corretas (0 = primeira alternativa)
+const correct = [0, 2, 2, 0, 0];
+
 let index = 0;
+let score = 0;
 
 function nextQuestion(){
  document.getElementById('start').classList.add('hide');
@@ -93,27 +93,33 @@ function nextQuestion(){
 
 function load(){
  if(index >= questions.length){ showResult(); return; }
- document.getElementById('question').innerText = questions[index].q;
+ document.getElementById('question').innerText = (index+1)+". "+questions[index].q;
  const box = document.getElementById('answers');
  box.innerHTML = "";
- questions[index].a.forEach(ans=>{
+ questions[index].a.forEach((ans,i)=>{
    const btn = document.createElement('button');
    btn.innerText = ans;
-   btn.onclick = ()=>{index++; load();};
+   btn.onclick = ()=>selectAnswer(i);
    box.appendChild(btn);
  });
+}
+
+function selectAnswer(i){
+ if(i === correct[index]) score++;
+ index++;
+ load();
 }
 
 function showResult(){
  document.getElementById('quiz').classList.add('hide');
  document.getElementById('result').classList.remove('hide');
- const results = [
- "🔥 RELÍQUIA DO KAIÇCA SUPREMA",
- "😂 SOBREVIVENTE DO CAOS",
- "🍺 PACIFICADOR DE CERVEJA",
- "🏃 FUGITIVO PROFISSIONAL"
- ];
- document.getElementById('final').innerText = results[Math.floor(Math.random()*results.length)];
+
+ let msg = "";
+ if(score === 5) msg = "🔥 Lenda do Casca – acertou tudo!";
+ else if(score >= 3) msg = "😂 Sobrevive bem ao Casca – " + score + "/5";
+ else msg = "🏃 Não aguenta o Casca – " + score + "/5";
+
+ document.getElementById('final').innerText = msg;
 }
 </script></body>
 </html>
