@@ -8,15 +8,21 @@ body{
   background:linear-gradient(135deg,#0f0f0f,#2b0000);
   color:#fff;
   text-align:center;
-  padding:20px
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .container{
+  width:100%;
   max-width:420px;
-  margin:auto;
+  min-height:100vh;
+  margin:0 auto;
   background:#1e1e1e;
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 0 25px rgba(255,0,0,0.4)
+  padding:25px;
+  border-radius:0;
+  box-shadow:none
 }
 h1{color:#ffb703;font-size:32px;margin-bottom:5px}
 h3{color:#ff4d4d;margin-top:0}
@@ -38,7 +44,14 @@ button:hover{transform:scale(1.05);opacity:0.9}
   padding:40px 20px
 }
 .start-screen p{font-size:18px;color:#ccc}
-.start-image{width:100%;border-radius:18px;margin-bottom:20px;box-shadow:0 0 15px rgba(255,0,0,0.4)}
+.start-image{
+  width:100%;
+  max-height:45vh;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:20px;
+  box-shadow:0 0 15px rgba(255,0,0,0.4)
+}
 </style>
 </head>
 <body>
